@@ -80,8 +80,8 @@ const costsTable = new aws.dynamodb.Table("costs", {
       projectionType: "ALL",
     },
     {
-      name: "paidForIndex",
-      hashKey: "paidFor",
+      name: "PaidForIndex",
+      hashKey: "PaidFor",
       rangeKey: "createdAt",
       projectionType: "ALL",
     },
