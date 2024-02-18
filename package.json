@@ -1,0 +1,18 @@
+{
+    "name": "playground-service",
+    "main": "infra/index.ts",
+    "description": "A repo for us to write experimental Pulumi and service code in",
+    "scripts": {
+    },
+    "volta": {
+        "node": "20.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20"
+    },
+    "dependencies": {
+        "@pulumi/pulumi": "^3.106.0",
+        "@pulumi/aws": "^6.22.2",
+        "@pulumi/awsx": "^2.5.0"
+    }
+}

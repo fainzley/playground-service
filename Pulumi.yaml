@@ -1,0 +1,3 @@
+name: playground-service
+description: A repo for us to write experimental Pulumi and service code in
+runtime: nodejs
