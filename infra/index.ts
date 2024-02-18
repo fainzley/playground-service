@@ -155,6 +155,5 @@ const lambda = new aws.lambda.CallbackFunction("lambda", {
   },
 });
 
-// Export the name of the bucket and the lambda arn
 export const bucketName = bucket.id;
 export const lambdaArn = lambda.arn;
