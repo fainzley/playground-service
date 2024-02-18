@@ -2,8 +2,7 @@
     "name": "playground-service",
     "main": "infra/index.ts",
     "description": "A repo for us to write experimental Pulumi and service code in",
-    "scripts": {
-    },
+    "scripts": {},
     "volta": {
         "node": "20.0.0"
     },
@@ -11,8 +10,9 @@
         "@types/node": "^20"
     },
     "dependencies": {
-        "@pulumi/pulumi": "^3.106.0",
+        "@aws-sdk/client-dynamodb": "^3.515.0",
         "@pulumi/aws": "^6.22.2",
-        "@pulumi/awsx": "^2.5.0"
+        "@pulumi/awsx": "^2.5.0",
+        "@pulumi/pulumi": "^3.106.0"
     }
 }

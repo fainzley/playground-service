@@ -16,12 +16,54 @@ const createS3BucketName = (name: string) => `${STAGE}-${SERVICE_NAME}-${name}`;
 // Create an example S3 bucket
 const bucket = new aws.s3.Bucket("bucket", { bucket: createS3BucketName("bucket") });
 
-// Create a role for the Lambda with no permissions, since the default role that
+const entitiesTable = new aws.dynamodb.Table("entities", {
+  billingMode: "PAY_PER_REQUEST",
+  attributes: [
+    { name: "id", type: "S" },
+    { name: "createdAt", type: "N" },
+  ],
+  // TODO: add GSI
+  hashKey: "id",
+  rangeKey: "createdAt",
+  name: createResourceName("entities"),
+});
+
+// Create a role for the Lambda with few permissions, since the default role that
 // CallbackFunction creates is very unrestricted
 const lambdaRole = new aws.iam.Role("lambda-role", {
   assumeRolePolicy: aws.iam.assumeRolePolicyForPrincipal({ Service: "lambda.amazonaws.com" }),
   // Attach the AWSLambdaBasicExecutionRole policy to the role that has permissions for CloudWatch logging etc.
   managedPolicyArns: ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"]
+});
+
+// DynamoDB read/write policy
+const dynamoDbPolicy = new aws.iam.Policy("dynamo-policy", {
+  description: "A policy that allows a lambda function to read and write to a DynamoDB table.",
+  // If we need to have multiple tables, we can use `all`:
+  // pulumi.all([table1.arn, table2.arn]).apply(([table1Arn, table2Arn]) => {})
+  policy: pulumi.output(entitiesTable.arn).apply((entitiesTableArn) => JSON.stringify({
+    Version: "2012-10-17",
+    Statement: [{
+      Action: [
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:Query",
+        "dynamodb:UpdateItem",
+        "dynamodb:PutItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:BatchGetItem",
+      ],
+      Effect: "Allow",
+      Resource: [entitiesTableArn],
+    }],
+  })),
+});
+
+// Attach the policy to the role
+const rolePolicyAttachment = new aws.iam.RolePolicyAttachment("rolePolicyAttachment", {
+  role: lambdaRole.name,
+  policyArn: dynamoDbPolicy.arn,
 });
 
 // Create an example Lambda Function. This uses Pulumi Function Serialization. If we
@@ -34,6 +76,11 @@ const lambda = new aws.lambda.CallbackFunction("lambda", {
   runtime: aws.lambda.Runtime.NodeJS20dX,
   role: lambdaRole.arn,
   name: createResourceName("lambda"),
+  environment: {
+    variables: {
+      ENTITIES_TABLE_NAME: entitiesTable.name,
+    }
+  }
 });
 
 // Export the name of the bucket and the lambda arn
