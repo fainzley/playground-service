@@ -14,11 +14,11 @@ interface BaseEntity {
 }
 
 interface UserEntity extends BaseEntity {
-  defaultCurrency: Currency;
+  currency: Currency;
 }
 
 interface GroupEntity extends BaseEntity {
-  targetCurrency: Currency;
+  currency: Currency;
 }
 
 interface BaseEntityRelation extends BaseEntity {}
@@ -29,7 +29,3 @@ interface UserGroupRelation extends BaseEntityRelation {
   balance: number;
   totalSpent: number;
 }
-
-// 2. define entities table with GSIs
-// 3. define costs table with GSIs
-// 4. look into serialisation/deserialisation method

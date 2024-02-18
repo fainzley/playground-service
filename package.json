@@ -11,17 +11,11 @@
         "@types/node": "^20"
     },
     "dependencies": {
-<<<<<<< Updated upstream
         "@aws-sdk/client-dynamodb": "^3.515.0",
-        "@pulumi/aws": "^6.22.2",
-        "@pulumi/awsx": "^2.5.0",
-        "@pulumi/pulumi": "^3.106.0"
-=======
         "@dinero.js/currencies": "^2.0.0-alpha.1",
         "@pulumi/aws": "^6.22.2",
         "@pulumi/awsx": "^2.5.0",
         "@pulumi/pulumi": "^3.106.0",
         "dinero.js": "^1.9.1"
->>>>>>> Stashed changes
     }
 }
