@@ -32,7 +32,7 @@ const entitiesTable = new aws.dynamodb.Table("entities", {
     // User/Group
     { name: "currency", type: "S" },
     // UserGroupRelation
-    { name: "admin", type: "BOOL" },
+    { name: "admin", type: "B" },
     { name: "addedBy", type: "S" },
     { name: "balance", type: "N" },
     { name: "totalSpent", type: "N" },
