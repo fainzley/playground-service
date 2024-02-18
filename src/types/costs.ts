@@ -1,6 +1,5 @@
-import { Currency, Dinero } from "dinero.js";
-
 import { UserId } from ".";
+import { CurrencyCode } from "./currency";
 
 enum CostCategory {
   BILLS = "Bills",
@@ -29,6 +28,6 @@ interface Cost {
   paidFor: UserId;
   updatedBy: UserId;
   category: CostCategory;
-  currency: Currency;
+  currency: CurrencyCode;
   exchangeRate: number;
 }

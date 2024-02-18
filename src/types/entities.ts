@@ -1,6 +1,5 @@
-import { Currency } from "dinero.js";
-
 import { UserId } from ".";
+import { CurrencyCode } from "./currency";
 
 type EntityType = "USER" | "GROUP" | "USER_GROUP_RELATION";
 
@@ -14,11 +13,11 @@ interface BaseEntity {
 }
 
 interface UserEntity extends BaseEntity {
-  currency: Currency;
+  currency: CurrencyCode;
 }
 
 interface GroupEntity extends BaseEntity {
-  currency: Currency;
+  currency: CurrencyCode;
 }
 
 interface BaseEntityRelation extends BaseEntity {}
