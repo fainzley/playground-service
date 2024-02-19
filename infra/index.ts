@@ -26,16 +26,6 @@ const entitiesTable = new aws.dynamodb.Table("entities", {
     { name: "id", type: "S" },
     { name: "entityId", type: "S" },
     { name: "createdAt", type: "N" },
-    { name: "updatedAt", type: "N" },
-    { name: "entityType", type: "S" },
-    { name: "name", type: "S" },
-    // User/Group
-    { name: "currency", type: "S" },
-    // UserGroupRelation
-    { name: "admin", type: "BOOL" },
-    { name: "addedBy", type: "S" },
-    { name: "balance", type: "N" },
-    { name: "totalSpent", type: "N" },
   ],
   globalSecondaryIndexes: [
     {
@@ -55,16 +45,9 @@ const costsTable = new aws.dynamodb.Table("costs", {
   attributes: [
     { name: "id", type: "S" },
     { name: "createdAt", type: "N" },
-    { name: "updatedAt", type: "N" },
-    { name: "name", type: "S" },
-    { name: "amount", type: "N" },
     { name: "groupId", type: "S" },
     { name: "paidBy", type: "S" },
     { name: "paidFor", type: "S" },
-    { name: "updatedBy", type: "S" },
-    { name: "category", type: "S" },
-    { name: "currency", type: "S" },
-    { name: "exchangeRate", type: "N" },
   ],
   globalSecondaryIndexes: [
     {
