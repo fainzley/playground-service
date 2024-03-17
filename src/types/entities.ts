@@ -12,7 +12,7 @@ interface BaseEntity {
   name: string;
 }
 
-interface UserEntity extends BaseEntity {
+export interface UserEntity extends BaseEntity {
   currency: CurrencyCode;
 }
 
