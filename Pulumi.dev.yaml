@@ -1,2 +1,3 @@
 config:
+  aws:profile: fainzley
   aws:region: eu-west-2

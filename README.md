@@ -42,3 +42,10 @@ pulumi preview
 This repo has the following GitHub actions:
 - a [`preview.yml`](./.github/workflows/preview.yml) action that comments a stack diff on PRs to `main`
 - a [`deploy.yml`](./.github/workflows/deploy.yml) action that deploys the updated stack to our beta and prod AWS accounts when there is a commit to `main`
+
+## Triggering Lambda Functions on dev from local
+
+1. Install [`AWS SAM`](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) to trigger Lambda
+2. Run `pulumi up` to make latest changes in AWS
+3. Run `sam remote invoke <arn_name>` to trigger Lambda
+4. To pass a structured event, send a JSON inline (or pass a path to a JSON file) as a parameter `--event` to the command above
